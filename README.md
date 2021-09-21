@@ -43,7 +43,9 @@ PostgreSQL application example for SIEMENS Industrial Edge.
       - [File upload via Postgres Static Server](#file-upload-via-postgres-static-server)
       - [Restore](#restore)
   - [Documentation](#documentation)
-
+  - [Contribution](#contribution)  
+  - [License & Legal Information](#license-&-legal-information)
+  - 
 ## Introduction 
 The **edge-postgresql** application allows you to manage **Object-Relational Databases (ORDs)** directly on Edge Devices, not only in terms of building and managing a database, but also in terms of backups and restores of data previously stored locally.
 
@@ -1147,3 +1149,11 @@ You can find further documentation and help about Industrial Edge in the followi
 - [Industrial Edge landing page](https://new.siemens.com/global/en/products/automation/topic-areas/industrial-edge/simatic-edge.html)
 - [Industrial Edge GitHub page](https://github.com/industrial-edge)
 - [Industrial Edge App Developer Guide](https://support.industry.siemens.com/cs/ww/en/view/109795865)
+
+## Contribution
+
+Thanks for your interest in contributing. Anybody is free to report bugs, unclear documentation, and other problems regarding this repository in the Issues section or, even better, is free to propose any changes to this repository using Merge Requests.
+
+## License & Legal Information
+
+Please read the [Legal Information](LICENSE.md).
