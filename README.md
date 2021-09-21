@@ -56,6 +56,7 @@ As shown in the figure below, the application consists of three different micros
 
 ![app-example-schema](docs/app-example-schema.png)
 
+
 ### Before starting
 This guide describes how to use and install and use the edge-postgresql application.
 
