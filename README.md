@@ -1132,18 +1132,18 @@ Once the upload is completed, the database will be updated so as to contain all 
 
 ## Documentation
 
-- [pgAdmin - Overview and features](#https://www.pgadmin.org/)
-- [PostgreSQL - Overview and features](#https://www.postgresql.org/docs/)
-- [Grafana - Overview and features](#https://grafana.com/)
-- [node-red-contrib-postgres-variable](#https://flows.nodered.org/node/node-red-contrib-postgres-variable)
-- [Docker Hub - PostgreSQL](#https://hub.docker.com/_/postgres)
-- [Docker Hub - pgAdmin](#https://hub.docker.com/r/dpage/pgadmin4/)
-- [Docker Hub - Grafana](#https://hub.docker.com/r/grafana/grafana/)
+- [pgAdmin - Overview and features](https://www.pgadmin.org/)
+- [PostgreSQL - Overview and features](https://www.postgresql.org/docs/)
+- [Grafana - Overview and features](https://grafana.com/)
+- [node-red-contrib-postgres-variable](https://flows.nodered.org/node/node-red-contrib-postgres-variable)
+- [Docker Hub - PostgreSQL](https://hub.docker.com/_/postgres)
+- [Docker Hub - pgAdmin](https://hub.docker.com/r/dpage/pgadmin4/)
+- [Docker Hub - Grafana](https://hub.docker.com/r/grafana/grafana/)
 
 You can find further documentation and help about Industrial Edge in the following links:
 
-- [Industrial Edge Hub](#https://iehub.eu1.edge.siemens.cloud/#/documentation)
-- [Industrial Edge Forum](#https://www.siemens.com/industrial-edge-forum)
-- [Industrial Edge landing page](#https://new.siemens.com/global/en/products/automation/topic-areas/industrial-edge/simatic-edge.html)
-- [Industrial Edge GitHub page](#https://github.com/industrial-edge)
-- [Industrial Edge App Developer Guide](#https://support.industry.siemens.com/cs/ww/en/view/109795865)
+- [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/#/documentation)
+- [Industrial Edge Forum](https://www.siemens.com/industrial-edge-forum)
+- [Industrial Edge landing page](https://new.siemens.com/global/en/products/automation/topic-areas/industrial-edge/simatic-edge.html)
+- [Industrial Edge GitHub page](https://github.com/industrial-edge)
+- [Industrial Edge App Developer Guide](https://support.industry.siemens.com/cs/ww/en/view/109795865)
