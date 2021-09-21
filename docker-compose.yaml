@@ -1,0 +1,65 @@
+version: "2.4"
+
+services:
+  edge-postgresql:
+    image: postgres:13.3-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: edge
+      POSTGRES_USER: edge
+      POSTGRES_PASSWORD: edge
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+    - edge-postgresql-data:/var/lib/postgresql/data
+    ports:
+    - "35432:5432"
+    mem_limit: 1024m
+    networks:
+    - proxy-redirect
+
+  edge-pgadmin:
+    build: ./pgadmin
+    image: edge-pgadmin:0.2.0
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: edge@siemens.com
+      PGADMIN_DEFAULT_PASSWORD: edge
+      PGADMIN_LISTEN_PORT: 80
+      PGADMIN_CONFIG_STORAGE_DIR: '"/usr/src/storage"'
+    ports:
+    - "35433:80"
+    volumes:
+    - edge-pgadmin-data:/var/lib/pgadmin
+    - postgresql-static-server-volume:/usr/src/storage
+    links:
+    - "edge-postgresql:pgsql-server"
+    - "postgresql-static-server"
+    mem_limit: 256m
+    networks:
+      - proxy-redirect
+
+  postgresql-static-server:
+    build: 
+      context: ./static-server
+    image: postgresql-static-server:0.2.0
+    hostname: postgresql-static-server
+    container_name: postgresql-static-server
+    restart: always
+    ports:
+      - 35434:5434        
+    volumes:
+      - postgresql-static-server-volume:/usr/src/app/public/storage
+    mem_limit: 150mb                           # mandatory field for IE
+    networks:
+      - proxy-redirect                          # default IE network
+
+volumes:
+  edge-postgresql-data:
+  edge-pgadmin-data:
+  postgresql-static-server-volume:
+
+networks:
+  proxy-redirect:
+    external:
+      name: proxy-redirect
+    driver: bridge

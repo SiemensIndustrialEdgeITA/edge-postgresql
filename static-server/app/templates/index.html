@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Postgres Static Server</title>
+
+    <!-- Javascript Includes -->
+    <script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Extra CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+    <style>
+        body {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Resumable Library -->
+    <script type="text/javascript" src="/js/resumable.js"></script>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 my-4">
+                <h1>Postgres Static Server</h1>
+                <br>
+                <h3>API App to upload and serve static files to Postgres through HTTP.</h3>
+                <br>
+                <h5>To restore backup files in Postgres database, upload the file and select the chosen path.</h5>
+                <h5>The chosen path defines the user to whom the backup file is visibile.</h5>
+                <h5>Then, go to Postgres. The file will be visibile in Tools / Restore / Filename.</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 my-4">
+                <h3>Import new backup file</h3>
+
+                <div class="row justify-content-center">
+                    <div class="col-4 align-self-center">
+                        <input class="form-control" list="backupPathsOption" id="inputDataList"
+                            placeholder="Select backup path" autocomplete="off" />
+                        <datalist id="backupPathsOption"></datalist>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="resumable-error">
+                            Your browser, unfortunately, is not supported by Resumable.js. The library requires support
+                            for <a href="http://www.w3.org/TR/FileAPI/">the HTML5 File API</a> along with <a
+                                href="http://www.w3.org/TR/FileAPI/#normalization-of-params">file slicing</a>.
+                        </div>
+
+                        <div class="resumable-drop">
+                            Drop files here to upload or <a class="resumable-browse"><u>select from your
+                                    computer</u></a>
+                        </div>
+
+                        <div class="resumable-progress">
+                            <table>
+                                <tr>
+                                    <td width="100%">
+                                        <div class="progress-container">
+                                            <div class="progress-bar"></div>
+                                        </div>
+                                    </td>
+                                    <td class="progress-text" nowrap="nowrap"></td>
+                                    <td class="progress-pause" nowrap="nowrap">
+                                        <a href="#" onclick="r.upload(); return(false);"
+                                            class="progress-resume-link"><img src="/images/resume.png"
+                                                title="Resume upload" /></a>
+                                        <a href="#" onclick="r.pause(); return(false);" class="progress-pause-link"><img
+                                                src="/images/pause.png" title="Pause upload" /></a>
+                                        <a href="#" onclick="r.cancel(); return(false);"
+                                            class="progress-cancel-link"><img src="/images/cancel.png"
+                                                title="Cancel upload" /></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <ul class="resumable-list"></ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 my-4" id="fileslist-div">
+                    <h3 class="mb-2">Backup files list</h3>
+                    <button type="button" class="btn btn-secondary mb-2" id="deletefiles"
+                        onclick="deleteAllFiles()">Delete
+                        All Static Files</button>
+                    <ul></ul>
+                </div>
+
+            </div>
+        </div>
+
+</body>
+
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+</html>

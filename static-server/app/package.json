@@ -1,0 +1,25 @@
+{
+  "name": "postgresql-static-server",
+  "version": "0.0.1",
+  "description": " NodeJS API to serve and upload backups files for postgresql",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "node",
+    "api-server",
+    "express",
+    "static"
+  ],
+  "dependencies": {
+    "cors": "~2.8.5",
+    "express": "~4.17.1",
+    "express-fileupload": "~1.2.1",
+    "node-static": "~0.7.11",
+    "connect-multiparty": "~2.2.0",
+    "mv": "~2.1.1"
+  }
+}
