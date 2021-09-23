@@ -47,7 +47,7 @@ PostgreSQL application example for SIEMENS Industrial Edge.
   - [License & Legal Information](#license-&-legal-information)
   - 
 ## Introduction 
-The **edge-postgresql** application allows you to manage **Object-Relational Databases (ORDs)** directly on Edge Devices, not only in terms of building and managing a database, but also in terms of backups and restores of data previously stored locally.
+The **edge-postgresql** application allows to manage **Object-Relational Databases (ORDs)** directly on Edge Devices, not only in terms of building and managing a database, but also in terms of backups and restores of data previously stored locally.
 
 As shown in the figure below, the application consists of three different microservices, described in details in the next paragraphs:
 * edge-postgresql
@@ -58,7 +58,7 @@ As shown in the figure below, the application consists of three different micros
 
 
 ### Before starting
-This guide describes how to use and install and use the edge-postgresql application.
+This guide describes how to use and install the edge-postgresql application.
 
 Before proceeding with the app installation, consult the necessary requirements in paragraph [Requirements](#requirements). Details on the procedure to follow for installing the app on an Edge Device are available in [Installation](#installation) paragraph.
 
@@ -69,8 +69,6 @@ The edge-postgresql application is supplied together with an application example
 The application example also provides an explanation on how to view the read data via the SIMATIC Flow Creator dashboard and via a dedicated dashboard within the **Grafana** application.
 
 For more information on how to install the Node-RED node dedicated to PostgreSQL, see paragraph [Node-RED PostgreSQL node installation](#nodered-postgresql-node-installation).
-
-The section [Build](#build) shows instead details on how this application was built by the mean of **Docker** environment.
 
 ## Requirements
 ### Used components
@@ -133,7 +131,7 @@ This paragraph provides a short description on how to publish the application in
 * Import the standalone application created [above](#create-new-standalone-application) to the selected IEM Project.
 * Press `Start Upload` to transfer the app to Industrial Edge Management.
 
-Further information on how to use the Industrial Edge App Publisher can be found in the [IE Hub](https://iehub.eu1.edge.siemens.cloud/documents/appPublisher/en/start.html).
+Further information on how to use the Industrial Edge App Publisher can be found in the [IE Hub](https://iehub.eu1.edge.siemens.cloud/documents/appPublisher/en/start.html), `Documents` section.
 
 ## Usage
 
@@ -190,7 +188,7 @@ To configure a new connection within pgAdmin, you must first specify the connect
 In addition to the connection name, also the following parameters can be  specified:
 * Membership group of the configured server: the configured server will be visible in the navigation tree under the parent node or membership group specified;
 * Server background and foreground colors;
-* If direct connection to the server upon completion and closure of the dialog box is needed;
+* Specify whether direct connection to the server upon completion and closure of the dialog box is needed;
 * Possibility of sharing the server with other users;
 * Comments.
 
@@ -204,11 +202,11 @@ Finally, it is necessary to specify the user and password (and the privileges of
 
 The following paragraph will indicate the server configuration used in the application example provided.
 
-For more in-depth information on the fields not mentioned, please visit https://www.pgadmin.org/docs/pgadmin4/5.6/server_dialog.html
+For more in-depth information on the fields not mentioned, please visit the [official documentation](https://www.pgadmin.org/docs/pgadmin4/5.6/server_dialog.html).
 
 #### pgAdmin on Edge Device
 
-The pgAdmin web page is accessible at `http://[core-name]:35433`, or simply by clicking on the edge-postgresql icon inside the Edge Device on which the application is installed. To access the application, the user and password are resepcitvely `edge@siemens.com` and `edge`, as configured in [docker-compose](docker-compose.yaml) file by the following environment variables:
+The pgAdmin web page is accessible at `http://[core-name]:35433`, or simply by clicking on the edge-postgresql icon inside the Edge Device on which the application is installed. To access the application, the user and password are respectively `edge@siemens.com` and `edge`, as configured in the [docker-compose](docker-compose.yaml) file by the following environment variables:
 
       PGADMIN_DEFAULT_EMAIL: edge@siemens.com
       PGADMIN_DEFAULT_PASSWORD: edge
@@ -236,21 +234,21 @@ The Postgres Static Server web page is accessible at `http://[core-name]:35434`.
 
 ## Application example
 ### Description
-The use of a database allows to create a **structured data archive** in which to save medium-long term data, and then act on the collected data for activities such as the visualization or analysis of historical data, with the aim of obtaining relevant information.
+The use of a database allows to create a **structured data archive** where to save medium-long term data, and then act on the collected data for activities such as the visualization or analysis of historical data, with the aim of obtaining relevant information.
 
 If designed correctly, a database can in fact allow the **structuring of heterogeneous data**, ensuring the accuracy and integrity of the information saved and facilitating the search or subsequent processing of the data itself. 
 
 In this application example it will be shown how to use PostgreSQL to implement an effective **data collection** and how to **graph the collected data** through multiple viewing modes. 
 
-An additional functionality described will be on how to perform **backup/restore of PostgreSQL databases** or single objects within a database (tables, procedures, functions, etc.), with the aim of using the backup files as a restore copu on different Edge Devices. This will help facilitating the replicability and scalability of the database related to a use case on multiple devices, depending on the different needs.
+An additional functionality described will be on how to perform **backup/restore of PostgreSQL databases** or single objects within a database (tables, procedures, functions, etc.), with the aim of using the backup files as a restore copy on different Edge Devices. This will help facilitating the replicability and scalability of the database related to a use case on multiple devices, depending on the different needs.
 
 ### Scope of the application
 
 The aim of this application example is to implement various functionalities:
 
 * Configuration of data exchange with SIMATIC S7 Connector and IE Databus apps;
-* Writing data from IE Databus with MQTT protocol in a dedicated PostgreSQL database;
-* Data retention and automated deletion of data from the PostgreSQL database;
+* Writing data from IE Databus with MQTT protocol into a dedicated PostgreSQL database;
+* Data retention and automated deletion of data from PostgreSQL database;
 * Dashboard for data visualization with Grafana;
 * Data reading from PostgreSQL database with time filter and conditional filter;
 * Dashboard for data visualization with SIMATIC Flow Creator;
@@ -264,8 +262,8 @@ The aim of this application example is to implement various functionalities:
 * The **SIMATIC Flow Creator** application must be installed on the Edge Device being used;
 * The node **node-red-contrib-postgres-variable** must be installed in the node library of SIMATIC Flow Creator. For more details see chapter [Node-RED PostgreSQL node installation](#nodered-postgresql-node-installation);
 * The [Flow_AppExample_S7toPostgreSQL.json](Flow_AppExample_S7toPostgreSQL.json) file must be imported into the SIMATIC Flow Creator application using the `Import` functionality from the dedicated menu;
-* The **edge-postgresql** application must be installed on the Edge Device being used. For more details follow chapter [Installation](#installation);
-* The edge-postgresql application comes with a **pre-loaded database** called **edge**. This database must necessarily exist for the created Node-RED stream to function properly.
+* The **edge-postgresql** application must be installed on the Edge Device being used. For more details check chapter [Installation](#installation);
+* The edge-postgresql application comes with a **pre-loaded database** called **edge**. This database must necessarily exist for the created Node-RED flow to function properly.
 
 ### Node-RED PostgreSQL node installation
 
@@ -292,7 +290,7 @@ In order to use the PostgreSQL database for saving information, it is first nece
 
 In this application example, the use of a **SIMATIC S7 PLC** data source is considered, configured within the **SIMATIC S7 Connector** application by entering the properties necessary for the communication and the list of variables to be monitored.
 
-In this case, within the S7 Connector application an **S7-1500 CPU** has been configured as a Datasource with S7 + protocol and with **Bulk Publish** data publishing mode:
+In this case, within the S7 Connector application an **S7-1500 CPU** has been configured as a Datasource with S7 + protocol and with **Bulk Publish** data publishing mode.
 
 ![app-example-s7-add-datasource](docs/app-example-s7-add-datasource.png)
 
@@ -312,11 +310,11 @@ For the purpose of this application example, 3 variables will be considered, sum
 | Production_BadPieces	| Discarded pieces counter              |	Production.BadPieces	|     Dint | Read          |
 | Production_MachSpeed	| Production speed in pieces/min. |	Production.MachSpeed  |	    Real | Read&Write    |
 
-The result of data source and tags configuration within S7 Connector application is shown in the image below, displaying the `Data Connections` section of the Industrial Edge Management system:
+The result of data source and tags configuration within S7 Connector application is shown in the image below, displaying the `Data Connections` section of the Industrial Edge Management system.
 
 ![app-example-s7-add-tags](docs/app-example-s7-add-tags.png)
 
-In Bulk Publish mode, when S7 Connector performs a data reading, only one MQTT topic is used where all the variables that have undergone a change of value in the configured cycle time are published (*CyclicOnChange* mode).
+In Bulk Publish mode, when S7 Connector performs a data reading, only one MQTT topic is used. On this topic will be published all the variables that have undergone a change of value in the configured cycle time (*CyclicOnChange* mode).
 
 The data read from the configured variables will then be available through the SIMATIC IE Databus application using the MQTT topic dedicated to the configured datasource (`1516_S7PLUS` in this example), which will cyclically emit a JSON message containing the `vals` property: an array with all the properties of the variables read.
 
@@ -459,7 +457,7 @@ To facilitate the reading and recognition of the configured variables, in the **
 
 ![app-example-flow-create-mapping](docs/app-example-flow-create-mapping.png)
 
-To do this, the flow uses a function (*function* node - *Create S7 ConnectionMap Variable*) which saves Map type objects within the global variable **S7ConnectionMap**, that are key-value pairs (*id-name* or *name-id* of the tags) sorted according to the insertion order of the various pairs within the variable. The content of the function node is the following:
+To do this, the flow uses a function (*function* node - *Create S7 ConnectionMap Variable*) which saves *Map* type objects within the global variable **S7ConnectionMap**, that are key-value pairs (*id-name* or *name-id* of the tags) sorted according to the insertion order of the various pairs within the variable. The content of the function node is the following:
 
 ```bash
 //Create an object containing each S7 Connector connection property with different Map Objects to create correspondence between Tags IDs, Names and Types. Initialize the connections Mapping Object.
@@ -474,9 +472,9 @@ let S7ConnectionMap = {
 //Check Payload
 let m = msg.payload;
 if (m.seq == undefined) {
-    // update global maps
+    // Update global maps
     flow.set("S7ConnectionMap", null);
-    // update function node status
+    // Update function node status
     node.status({fill:"red",shape:"ring",text:"S7Map cannot be created"});
     
     return null;
@@ -486,10 +484,10 @@ if (m.seq == undefined) {
 for (let i = 0; i < m.connections.length; i++)
 {
     let connection = m.connections[i];
-    // push connection name and type in global object
+    // Push connection name and type in global object
     S7ConnectionMap.nameList.push(connection.name);
     S7ConnectionMap.typeList.push(connection.type);
-    // init maps
+    // Initiate maps
     let nameIDMap = new Map();
     let IDNameMap = new Map();
     let IDTypeMap = new Map();
@@ -510,7 +508,7 @@ for (let i = 0; i < m.connections.length; i++)
             IDTypeMap.set(dataPointDefinition.id, dataPointDefinition.dataType);        
         }
     }
-    // push mappings in global object
+    // Push mappings in global object
     S7ConnectionMap.nameIDMaps.push(nameIDMap);
     S7ConnectionMap.IDnameMaps.push(IDNameMap);
     S7ConnectionMap.IDTypeMaps.push(IDTypeMap);
@@ -586,7 +584,7 @@ CREATE TABLE production (
 );
 ```
 
-As visible from the SQL code above, the production table consists of 6 columns:
+As visible from the SQL code above, the `production` table consists of 6 columns:
 
 1. **id**: unique identifier of the record in the table. This column is the primary key of the table and is automatically incremented by 1 when a new record is inserted.
 2. **timestamp**: date and time of reading.
@@ -595,7 +593,7 @@ As visible from the SQL code above, the production table consists of 6 columns:
 5. **MachSpeed**: real number representing the speed of the machine.
 6. **MachineName**: string representing the name of the machine associated with the production.
 
-Within the flow of SIMATIC Flow Creator provided with the application example, the reading of the data from S7 Connector is carried out via an *mqtt-in* node (1), which subsequently sends the message content to a *function* node (2) that processes the data in order to make them compatible with the standard required by *postgres* node (4) which will instead be in charge of sending the request to the pre-configured PostgreSQL database called edge. To optimize the writing load on the database, a *join* node (3) creates a batch of 5 datasets before sending them to the PostgreSQL database.
+Within the flow of SIMATIC Flow Creator provided with the application example, the reading of the data from S7 Connector is carried out via an *mqtt-in* node (1), which subsequently sends the message content to a *function* node (2) that processes the data in order to make them compatible with the standard required by *postgres* node (4). This node will instead be in charge of sending the request to the pre-configured PostgreSQL database called edge. To optimize the writing load on the database, a *join* node (3) creates a batch of 5 datasets before sending them to the PostgreSQL database.
 
 ![app-example-flow-send-data-to-postgres](docs/app-example-flow-send-data-to-postgres.png)
 
@@ -638,7 +636,7 @@ Below an example of the output of the *mqtt-in* node:
   }
 }
 ```
-To connect to the SIMATIC IE Databus MQTT broker, you need to configure a user enabled for data exchange. In this case it was configured using the following parameters:
+To connect to the SIMATIC IE Databus MQTT broker, a user needs to be configured and enabled for data exchange. In this case it was configured using the following parameters:
 
 |**IE Databus Address**|**IE Databus Port**|**IE Databus User**|**IE Databus Password**|
 |----------------------|-------------------|-------------------|-----------------------|
@@ -725,7 +723,7 @@ In the code, the property *id* of each variable read is compared with the *id* o
 
 The output message of the function contains the timestamp (*epoch*) in ms obtained from the `ts` property of each variable read. It will also contain the values ​​of the tags of interest, identified through the `val` property of the read messages, rounded up to 2 decimal digits.
 
-The string `Demo_Line` of the output messages, is instead a fixed parameter that identifies the name of the machine to which the read tags are associated to. This string will correspond to the `machineName` column of database `production` table, and will be filled in with `Demo_Line` for all records entered into the tabel of PostgreSQL database.
+The string `Demo_Line` of the output messages, is instead a fixed parameter that identifies the name of the machine to which the read tags are associated to. This string will correspond to the `machineName` column of database `production` table, and will be filled in with `Demo_Line` for all records entered into the table of PostgreSQL database.
 
 The *join* node (3) following the *function* node (2), creates an array that identifies the batch of data to be subsequently inserted into `production` table of PostgreSQL database. The characteristics of this node are explained more in details in paragraph [Batch data series buffer](#batch-data-series-buffer).
 
