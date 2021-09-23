@@ -45,7 +45,7 @@ PostgreSQL application example for SIEMENS Industrial Edge.
   - [Documentation](#documentation)
   - [Contribution](#contribution)  
   - [License & Legal Information](#license-&-legal-information)
-  - 
+
 ## Introduction 
 The **edge-postgresql** application allows to manage **Object-Relational Databases (ORDs)** directly on Edge Devices, not only in terms of building and managing a database, but also in terms of backups and restores of data previously stored locally.
 
@@ -826,13 +826,13 @@ Within the SIMATIC Flow Creator flow of the application example provided, data r
 
 The *function* (2) node formats the query to be sent to *postgres* (3) node, which is responsible of sending the configured query to PostgreSQL database. 
 
-Once the answer is obtained, this is processed and formatted by *function* (4) node for the display of a graph on the Dashboard through the *ui_chart* (5) node.
+Once the query result is obtained, this is processed and formatted by *function* (4) node for the display of a line graph on the Dashboard through the *ui_chart* (5) node.
 
 Below the details on Node-RED nodes involved:
 
 ![app-example-flow-data-reading-from-postgres](docs/app-example-flow-data-reading-from-postgres.png)
 
-In this application example we will use the *postgres* node connected to the edge-postgresql database service and a dedicated query to read data of `Production_GoodPieces` and `Production_BadPieces` saved in `production` table of the last 24 hours and aggregate them in order to reduce the number of samples to be displayed.
+In this application example we will use the *postgres* node connected to the edge-postgresql database service and a dedicated query to read data of `Production_GoodPieces` and `Production_BadPieces` saved in `production` table of the last 24 hours, aggregating them in order to reduce the number of samples to be displayed.
 
 ![app-example-flow-data-reading-from-postgres-query](docs/app-example-flow-data-reading-from-postgres-query.png)
 
@@ -895,13 +895,13 @@ For more information on the node-red-dashboard library, please visit the [offici
 
 In particular, the **chart-ui** node of node-red-dashboard allows to visualize graphs of different types (lines, bars, pie) on the SIMATIC Flow Creator Web Dashboard, both by sending new data in real-time and by sending the entire data structure.
 
-In this application example, starting from the data received by *postgres* node and obtained as a result of query execution on the database, a line chart with data of the last 24 hours will be created. 
+As mentioned before, in this application example, starting from the data received by *postgres* node and obtained as a result of query execution on the database, a line chart with data of the last 24 hours will be created. 
 
 With **chart-ui** node it is possible to define all configuration parameters, such as the Tab name ("S7 - PostgreSQL App Example"), line colors, axis labels and the Dashboard Group ("Control and Monitor") to which the dashboard will belong to:
 
 ![app-example-flow-chart-node-settings](docs/app-example-flow-chart-node-settings.png)
 
-Before proceeding with data visualization, however, it is be necessary to adapt the data format according to the standard of **chart-ui** node. This is done through a *function* node dedicated to the processing of the received time series array.
+Before proceeding with data visualization, however, it is necessary to adapt the data format according to the standard of **chart-ui** node. This is done through a *function* node dedicated to the processing of the received time series array.
 
 For more information on how to format correctly one or more datasets for visualization purposes via the **chart-ui** node, visit the [official documentation](https://github.com/node-red/node-red-dashboard/blob/master/Charts.md) of the node-red-dashboard library.
 
@@ -990,8 +990,8 @@ The formatted data can be viewed as two series on a line chart by opening the SI
 
 The visualization of data loaded into the PostgreSQL database can be done not only through the application SIMATIC Flow Creator, but also through other applications or methods.
 
-Another example of application is **Grafana**, an open-source solution that allows you to query, view, send alerts and explore the metrics of interest, regardless their storage location. It provides the tools to transform data and time series from different sources (PostgreSQL, InfluxDB, MySQL, etc.) into different types of graphs.
-For more information on Grafana see: https://grafana.com/docs/grafana/latest/.
+Another example of application is **Grafana**, an open-source solution that allows to query, view, send alerts and explore the metrics of interest, regardless their storage location. It provides the tools to transform data and time series from different sources (PostgreSQL, InfluxDB, MySQL, etc.) into different types of graphs.
+For more information on Grafana please visit the [official page](https://grafana.com/docs/grafana/latest/).
 
 The Grafana application comes with the pre-built **edge-grafana_x.x.x.app** app package (based on the supplied version x.x.x), which can be installed specifically on Edge Devices using SIMATIC Edge.
 To install the application, you can follow the same instructions described in paragraph [Installation](#installation) for the edge-postgresql application.
@@ -1012,7 +1012,7 @@ By clicking on PostgreSQL, the connection parameters are visible. These connecti
 
 ![app-example-grafana-postgres-datasource-settings](docs/app-example-grafana-postgres-datasource-settings.png)
 
-As mentioned previously, Grafana allows you to graphically view data from different sources, through special panels, called **dashboards**.
+As mentioned previously, Grafana allows to graphically view data from different sources, through special panels, called **dashboards**.
 
 The creation of these panels can be done using interactive query builders, which facilitate the integration of the application with data sources such as MySQL, InfluxDB and PostgreSQL.
 
@@ -1030,7 +1030,7 @@ The characteristics of the graph can be instead edited through the right-hand me
 
 ![app-example-grafana-line-graph-settings](docs/app-example-grafana-line-graph-settings.png)
 
-Another type of graph that can be configured within Grafana is the **gauge**, which allows you to define tolerance thresholds for a specific variable and therefore easily discriminate, on a visual level, if the variable in question is within the security thresholds or not.
+Another type of graph that can be configured within Grafana is the **gauge**, which allows to define tolerance thresholds for a specific variable and therefore easily discriminate, on a visual level, if the variable in question is within the security thresholds or not.
 
 Below an example of **gauge built to graphically display the value of the `MachineSpeed` ​​variable**.
 
