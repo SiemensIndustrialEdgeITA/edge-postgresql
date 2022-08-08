@@ -4,37 +4,31 @@ const path = require('path');
 // packages for API Server App
 const express = require('express');
 const cors = require('cors');
-const app = express();
-var fs = require('fs')
-var https = require('https')
-
-// an express module to upload files
-//const fileUpload = require('express-fileupload');
-
+const fs = require('fs')
+const https = require('https')
 // server for serving static files
 const statics = require('node-static');
 
-// set public folder for static server
-var fileServer = new statics.Server('./public/storage');
-
-// resumable for uploading big files, the target folder is /tmp-storage
-var resumable = require('./resumable-node.js')('/tmp-storage/');
-var multipart = require('connect-multiparty');
+// the express app
+var app = express();
 
 // define some default properties for server
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(multipart());
 
-//app.use(express.static(path.join(__dirname, '/static')));
 app.use(express.static('static'));
-// use the file uploader
-//app.use(fileUpload());
 
+// the upload folder 
+const uploadDir = "./public"
+
+// set public folder for static server
+var fileServer = new statics.Server('./public/storage');
 
 // load all API Routes
-const routes = require('./routes/routes.js')(app, fileServer, resumable);
+const router = require('./routes/router.js')(app, fileServer, uploadDir);
+
+console.log(new Date().toISOString(), '- PostgreSQL Static Server v 0.3.0 started!');
 
 // create server HTTPS
 const server = https.createServer({
@@ -42,7 +36,7 @@ const server = https.createServer({
   cert: fs.readFileSync('certs/server.cert')
 }, app)
   .listen(5434, function () {
-    console.log('listening on port %s...', server.address().port);
+    console.log(new Date().toISOString(), '- Listening on port', server.address().port, "...");
   })
 
 // create server HTTP

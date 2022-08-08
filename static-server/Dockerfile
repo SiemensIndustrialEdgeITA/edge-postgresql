@@ -52,7 +52,7 @@ COPY --from=BUILD /usr/src/app/ ./
 # copy generated certs from BUILD
 COPY --from=BUILD /tmp/certs ./certs
 
+RUN chmod +x ./entrypoint.sh
 
-CMD ["node", "/usr/src/app/main.js"]
-#ENTRYPOINT ["tail", "-f" , "/dev/null"]
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 

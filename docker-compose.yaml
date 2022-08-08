@@ -19,7 +19,7 @@ services:
 
   edge-pgadmin:
     build: ./pgadmin
-    image: edge-pgadmin:0.2.0
+    image: edge-pgadmin:0.3.0
     restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: edge@siemens.com
@@ -41,7 +41,7 @@ services:
   postgresql-static-server:
     build: 
       context: ./static-server
-    image: postgresql-static-server:0.2.0
+    image: postgresql-static-server:0.3.0
     hostname: postgresql-static-server
     container_name: postgresql-static-server
     restart: always
@@ -49,7 +49,7 @@ services:
       - 35434:5434        
     volumes:
       - postgresql-static-server-volume:/usr/src/app/public/storage
-    mem_limit: 150mb                           # mandatory field for IE
+    mem_limit: 400mb                           # mandatory field for IE
     networks:
       - proxy-redirect                          # default IE network
 
@@ -60,6 +60,4 @@ volumes:
 
 networks:
   proxy-redirect:
-    external:
       name: proxy-redirect
-    driver: bridge

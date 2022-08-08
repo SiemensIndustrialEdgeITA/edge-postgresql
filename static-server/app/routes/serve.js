@@ -3,12 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 
+
 function getFilesRecursively(files, directory) {
   const filesInDirectory = fs.readdirSync(directory);
-  console.log(filesInDirectory);
+  //console.log(filesInDirectory);
   for (const file of filesInDirectory) {
     const absolute = path.join(directory, file);
-    console.log(absolute);
+    //console.log(absolute);
     if (fs.statSync(absolute).isDirectory()) {
       getFilesRecursively(files, absolute);
     } else {
@@ -22,8 +23,11 @@ const serveRoutes = (app, fileServer) => {
   // SERVE FILE FROM PUBLIC FOLDER
   app.get('/files/:filename', function (req, res) {
 
+    // get file name
     let filename = req.params["filename"];
-    fileServer.serveFile(filename, 200, {}, req, res);
+    // serve the requested file
+    fileServer.serveFile(filename.replace("storage", ""), 200, {}, req, res);
+    console.log(new Date().toISOString(), "- Serving file", filename, "successfully.");
 
   });
 
@@ -32,7 +36,7 @@ const serveRoutes = (app, fileServer) => {
     let files = [];
     getFilesRecursively(files, "/usr/src/app/public/storage");
     let bodyRes = { "files": files };
-    console.log(bodyRes);
+    //console.log(bodyRes);
     res.status(200).send(bodyRes);
   });
 
@@ -46,14 +50,14 @@ const serveRoutes = (app, fileServer) => {
         bodyRes.dirs.push(file);
       }
     });
-    console.log(bodyRes);
+    //console.log(bodyRes);
     res.status(200).send(bodyRes);
   });
 
   // DELETE ALL FILES IN PUBLIC FOLDER
-  app.get('/filesclean', function (req, res) {
+  app.get('/cleanall', function (req, res) {
     let foldername = req.headers["x-foldername"];
-    console.log(req)
+    //console.log(req)
     // delete all files in backup dump backup folder
     fs.readdirSync("/usr/src/app/public/storage/" + foldername).forEach((file, index) => {
       // delete file
@@ -63,6 +67,18 @@ const serveRoutes = (app, fileServer) => {
     res.status(200).send({ "msg": "All files in " + foldername + " deleted successfully." });
   });
 
+  // DELETE A FILE IN PUBLIC FOLDER
+  app.get('/clean/:filename', function (req, res) {
+
+    // get file name
+    let filename = req.params["filename"];
+    //console.log(req)
+
+    // delete file
+    fs.unlinkSync(path.join("/usr/src/app/public/", filename));
+
+    res.status(200).send({ "msg": "File " + filename + " deleted successfully." });
+  });
 };
 
 module.exports = serveRoutes;
